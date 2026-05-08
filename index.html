@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SastaSentinels | Elite Esports Squad</title>
+    <meta name="description" content="SastaSentinels — six friends, one squad, zero mercy. FPS and beyond.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==================== SPLASH ==================== -->
+    <div id="splash">
+        <div class="splash-scanline"></div>
+        <div class="splash-hud">
+            <span class="hc tl"></span>
+            <span class="hc tr"></span>
+            <span class="hc bl"></span>
+            <span class="hc br"></span>
+            <div class="splash-logo">
+                <span class="sl-b">[</span>
+                <span class="sl-i">SS</span>
+                <span class="sl-b">]</span>
+            </div>
+            <div class="splash-wordmark">
+                <span class="sw-a">SASTA</span>
+                <span class="sw-b">SENTINELS</span>
+            </div>
+            <div class="splash-sep"></div>
+            <div class="splash-track">
+                <div class="splash-fill"></div>
+            </div>
+            <p class="splash-status" id="splashStatus">INITIALIZING...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">SS</span>
+                <span class="logo-bracket">]</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#team">Squad</a></li>
+                <li><a href="#games">Arsenal</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="nav-status">
+                    <span class="status-dot"></span>
+                    <span>ACTIVE</span>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#hero" class="mobile-link">Home</a></li>
+            <li><a href="#team" class="mobile-link">Squad</a></li>
+            <li><a href="#games" class="mobile-link">Arsenal</a></li>
+        </ul>
+    </div>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">// ELITE ESPORTS SQUAD</div>
+            <h1 class="hero-title">
+                <span class="title-sasta glitch" data-text="SASTA">SASTA</span>
+                <span class="title-sentinels">SENTINELS</span>
+            </h1>
+            <p class="hero-tagline" id="tagline"></p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">PLAYERS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">DEDICATION</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">SQUAD</span>
+                </div>
+            </div>
+            <a href="#team" class="hero-cta">
+                <span>MEET THE SQUAD</span>
+                <span class="cta-arrow">↓</span>
+            </a>
+        </div>
+        <div class="hero-scroll-line"></div>
+    </section>
+
+    <!-- ==================== TEAM ==================== -->
+    <section id="team">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">// THE SQUAD</span>
+                <h2 class="section-title">MEET THE <span class="accent">SENTINELS</span></h2>
+                <p class="section-subtitle">Seven players. One purpose. Zero mercy.</p>
+            </div>
+
+            <div class="team-grid">
+
+                <!-- #07 BeastM0del -->
+                <div class="player-card ace-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="ace-badge">★ THE PRO</div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring ace-ring"></div>
+                            <div class="avatar-core ace-core">AB</div>
+                            <span class="avatar-num">#07</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role ace-role">CARRY · TOP FRAGGER</div>
+                            <h3 class="player-ign">BeastM0del</h3>
+                            <p class="player-realname">Arpan Bose</p>
+                            <p class="player-bio">The squad's undisputed ace. BeastM0del operates on a level the rest of us are still chasing — the player enemies study in VODs, teammates rally behind, and opponents dread seeing in the lobby.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #01 WizVoltric -->
+                <div class="player-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-core">WV</div>
+                            <span class="avatar-num">#01</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role">CO-IGL · RIFLER</div>
+                            <h3 class="player-ign">WizVoltric</h3>
+                            <p class="player-realname">Nikhar Mahendra Singh</p>
+                            <p class="player-bio">Electric reflexes and relentless aggression. WizVoltric sets the pace on the server — a rifler who makes space, wins duels, and executes the calls that GreyWolf crafts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #02 GreyWolf -->
+                <div class="player-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-core">GW</div>
+                            <span class="avatar-num">#02</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role">HEAD IGL · STRATEGIST</div>
+                            <h3 class="player-ign">GreyWolf</h3>
+                            <p class="player-realname">Aditya Kumar Singh</p>
+                            <p class="player-bio">The mind the squad runs on. GreyWolf's reads are a round ahead of everyone else — dissecting enemy patterns mid-game, adapting mid-half, and calling the plays that turn losing maps into clean wins.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #03 KINGPIN -->
+                <div class="player-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-core">KP</div>
+                            <span class="avatar-num">#03</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role">ENTRY FRAGGER</div>
+                            <h3 class="player-ign">KINGPIN</h3>
+                            <p class="player-realname">Debraj Burman</p>
+                            <p class="player-bio">Fear is a foreign concept. Leads the charge every round, forcing duels with terrifying confidence and setting the relentless pace that defines every round's outcome.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #04 Sectumsempra -->
+                <div class="player-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-core">SS</div>
+                            <span class="avatar-num">#04</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role">AWPer · SNIPER</div>
+                            <h3 class="player-ign">Sectumsempra</h3>
+                            <p class="player-realname">Kartikeya Singh</p>
+                            <p class="player-bio">Long angles don't exist — only targets. Crosshair placement is a spell in itself: one flick, one bullet, one soul less on the enemy roster per round.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #05 AgentTrigger -->
+                <div class="player-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-core">AT</div>
+                            <span class="avatar-num">#05</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role">SUPPORT · CLUTCH</div>
+                            <h3 class="player-ign">AgentTrigger</h3>
+                            <p class="player-realname">Arpan Mitra</p>
+                            <p class="player-bio">When rounds seem lost and teammates are down, AgentTrigger triggers. Maestro of utility, ghost of 1vX situations, and the sole reason comebacks even happen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #06 STING -->
+                <div class="player-card">
+                    <div class="card-border-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-corner tl"></div>
+                        <div class="card-corner tr"></div>
+                        <div class="card-corner bl"></div>
+                        <div class="card-corner br"></div>
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-core">ST</div>
+                            <span class="avatar-num">#06</span>
+                        </div>
+                        <div class="player-info">
+                            <div class="player-role">SENTINEL · ANCHOR</div>
+                            <h3 class="player-ign">STING</h3>
+                            <p class="player-realname">Kaushik</p>
+                            <p class="player-bio">Sites don't fall while STING holds them. A fortress of discipline and game sense, anchoring defenses with the patience that turns every aggression into a free kill.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GAMES ==================== -->
+    <section id="games">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">// ARSENAL</span>
+                <h2 class="section-title">GAMES WE <span class="accent">PLAY</span></h2>
+                <p class="section-subtitle">From tactical FPS to epic narratives — we play it all.</p>
+            </div>
+
+            <div class="games-category">
+                <div class="category-label">
+                    <span class="cat-icon">⊕</span>
+                    <span>COMPETITIVE FPS</span>
+                    <div class="cat-line"></div>
+                </div>
+                <div class="fps-grid">
+
+                    <div class="game-card featured">
+                        <div class="game-badge">MAIN</div>
+                        <div class="game-code">VAL</div>
+                        <h4 class="game-name">Valorant</h4>
+                        <p class="game-desc">Our primary battleground. Agents, angles, and abilities — we master every meta shift and adapt without hesitation.</p>
+                        <div class="game-bar"><div class="game-bar-fill" data-fill="95"></div></div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-badge dim">CLASSIC</div>
+                        <div class="game-code">CS2</div>
+                        <h4 class="game-name">Counter-Strike 2</h4>
+                        <p class="game-desc">The foundation of all tactical shooters. We pay our respects and sharpen our fundamentals here.</p>
+                        <div class="game-bar"><div class="game-bar-fill" data-fill="80"></div></div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-badge dim">BR</div>
+                        <div class="game-code">APEX</div>
+                        <h4 class="game-name">Apex Legends</h4>
+                        <p class="game-desc">Battle royale elevated. Movement mechanics that punish the lazy and reward the mechanically gifted.</p>
+                        <div class="game-bar"><div class="game-bar-fill" data-fill="72"></div></div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-badge dim">BR</div>
+                        <div class="game-code">WZ</div>
+                        <h4 class="game-name">Warzone</h4>
+                        <p class="game-desc">Drop hot. Loot fast. Dominate the final circle. We don't survive — we hunt.</p>
+                        <div class="game-bar"><div class="game-bar-fill" data-fill="65"></div></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="games-category">
+                <div class="category-label">
+                    <span class="cat-icon">◈</span>
+                    <span>STORY &amp; ADVENTURE</span>
+                    <div class="cat-line"></div>
+                </div>
+                <div class="story-grid">
+
+                    <div class="game-card story">
+                        <div class="game-code sm">GoW</div>
+                        <h4 class="game-name">God of War</h4>
+                        <p class="game-desc">Kratos humbles us every time. A masterclass in how storytelling should be done.</p>
+                    </div>
+
+                    <div class="game-card story">
+                        <div class="game-code sm">RDR2</div>
+                        <h4 class="game-name">Red Dead 2</h4>
+                        <p class="game-desc">When we need to slow down and appreciate an open world crafted with obsessive detail.</p>
+                    </div>
+
+                    <div class="game-card story">
+                        <div class="game-code sm">TLOU</div>
+                        <h4 class="game-name">The Last of Us</h4>
+                        <p class="game-desc">Survival, emotion, impossible choices. No one walks away from this one unchanged.</p>
+                    </div>
+
+                    <div class="game-card story">
+                        <div class="game-code sm">GTA</div>
+                        <h4 class="game-name">GTA V</h4>
+                        <p class="game-desc">Off-duty chaos and creative destruction. Sometimes you just need to vibe and cause mayhem.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">SASTA SENTINELS</span>
+                <span class="logo-bracket">]</span>
+            </div>
+            <p class="footer-tagline">WE AIM &nbsp;·&nbsp; WE CONQUER &nbsp;·&nbsp; WE DOMINATE</p>
+            <div class="footer-sep"></div>
+            <p class="footer-credit">Built with passion and blood-red code by the SastaSentinels</p>
+            <p class="footer-copy">© 2025 SastaSentinels · All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
