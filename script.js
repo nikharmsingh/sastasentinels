@@ -63,7 +63,7 @@ canvas.addEventListener('mouseleave', () => {
 
 function resizeCanvas() {
     canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = Math.round(window.innerHeight * 1.4);
 }
 
 class Particle {
@@ -310,6 +310,123 @@ document.querySelectorAll('.player-card').forEach(card => {
     el.className = 'card-agent';
     el.style.backgroundImage = `url('${url}')`;
     card.querySelector('.card-inner').prepend(el);
+});
+
+// ── Custom Crosshair Cursor ────────────────────────────────
+
+const crosshair = document.getElementById('crosshair');
+let rafPending = false;
+let cursorX = -200, cursorY = -200;
+
+document.addEventListener('mousemove', e => {
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+    if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(() => {
+            crosshair.style.transform = `translate(${cursorX}px,${cursorY}px)`;
+            rafPending = false;
+        });
+    }
+});
+
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+// ── Hero Parallax ──────────────────────────────────────────
+
+window.addEventListener('scroll', () => {
+    canvas.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+}, { passive: true });
+
+// ── Sound Effects (Web Audio API) ─────────────────────────
+
+const soundToggleBtn  = document.getElementById('soundToggle');
+const soundOnIcon     = soundToggleBtn.querySelector('.sound-on');
+const soundOffIcon    = soundToggleBtn.querySelector('.sound-off');
+let soundEnabled = false;
+let audioCtx = null;
+
+function initAudio() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+
+function playTone(freq, duration, type = 'square', vol = 0.035) {
+    if (!soundEnabled || !audioCtx) return;
+    const osc  = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.5, audioCtx.currentTime + duration);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+}
+
+soundToggleBtn.addEventListener('click', () => {
+    initAudio();
+    soundEnabled = !soundEnabled;
+    soundToggleBtn.classList.toggle('active', soundEnabled);
+    soundOnIcon.style.display  = soundEnabled ? '' : 'none';
+    soundOffIcon.style.display = soundEnabled ? 'none' : '';
+    if (soundEnabled) playTone(880, 0.1, 'sine', 0.05);
+});
+
+document.querySelectorAll('.player-card, .game-card, .hero-cta, .join-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => playTone(600, 0.07, 'square', 0.025));
+});
+
+document.querySelectorAll('.hero-cta, .join-btn, .yt-link').forEach(el => {
+    el.addEventListener('click', () => playTone(1100, 0.1, 'sine', 0.045));
+});
+
+// ── Stats Counter ──────────────────────────────────────────
+
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('.stat-counter-num').forEach(el => {
+            const target   = parseInt(el.dataset.target, 10);
+            const duration = 1800;
+            const step     = 16;
+            const inc      = target / (duration / step);
+            let current    = 0;
+            const timer = setInterval(() => {
+                current = Math.min(current + inc, target);
+                el.textContent = Math.floor(current).toLocaleString();
+                if (current >= target) clearInterval(timer);
+            }, step);
+        });
+        counterObserver.unobserve(entry.target);
+    });
+}, { threshold: 0.4 });
+
+const statsSection = document.getElementById('stats');
+if (statsSection) counterObserver.observe(statsSection);
+
+// ── Highlight video injection ──────────────────────────────
+
+document.querySelectorAll('.highlight-wrap[data-video]').forEach(wrap => {
+    const vid = wrap.dataset.video;
+    if (!vid || vid.startsWith('VIDEO_ID_')) return;
+    const iframe = document.createElement('iframe');
+    iframe.className = 'highlight-frame';
+    iframe.src = `https://www.youtube.com/embed/${vid}`;
+    iframe.title = 'SastaSentinels Highlight';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', '');
+    wrap.innerHTML = '';
+    wrap.appendChild(iframe);
+});
+
+// ── Extend scroll-reveal to new sections ──────────────────
+
+document.querySelectorAll('.match-row, .highlight-wrap').forEach(el => {
+    revealObserver.observe(el);
 });
 
 // ── 3D tilt on player cards ────────────────────────────────
