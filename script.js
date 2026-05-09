@@ -26,10 +26,15 @@
     // Exit: slide up then remove
     setTimeout(() => {
         splash.classList.add('exit');
-        splash.addEventListener('transitionend', () => {
+
+        function hideSplash() {
             splash.style.display = 'none';
             document.body.style.overflow = '';
-        }, { once: true });
+        }
+
+        splash.addEventListener('transitionend', hideSplash, { once: true });
+        // Fallback: if transitionend never fires (Reduce Motion, old browser), force-clear after 1s
+        setTimeout(hideSplash, 1000);
     }, 3200);
 })();
 

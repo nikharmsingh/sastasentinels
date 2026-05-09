@@ -89,6 +89,11 @@ body::after {
     transform: translateY(-100%);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    #splash { transition: none; }
+    #splash.exit { display: none !important; }
+}
+
 /* Moving scan line */
 .splash-scanline {
     position: absolute;
