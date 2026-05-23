@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+
+# Node (if ever introduced)
+node_modules/
