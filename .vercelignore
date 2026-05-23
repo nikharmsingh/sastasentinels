@@ -1,6 +1,4 @@
 Dockerfile
 docker-compose.yml
 .dockerignore
-.git
 .claude
-*.md
