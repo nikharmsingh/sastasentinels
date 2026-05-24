@@ -1,12 +1,13 @@
 from fasthtml.common import *
 from starlette.staticfiles import StaticFiles
+from mangum import Mangum
 import os
 
 # ── App setup ─────────────────────────────────────────────────
 
 FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='monospace' font-weight='900' font-size='18' fill='%23cc0000' text-anchor='middle'%3ESS%3C/text%3E%3C/svg%3E"
 
-app, rt = fast_app(
+_fh, rt = fast_app(
     hdrs=(
         Meta(name="theme-color", content="#cc0000"),
         Link(rel="icon", href=FAVICON),
@@ -26,11 +27,11 @@ app, rt = fast_app(
     live=False,
 )
 
-app.mount(
-    "/static",
-    StaticFiles(directory=os.path.join(os.path.dirname(__file__), "static")),
-    name="static",
-)
+# Explicit simple assignment — required for Vercel's AST scanner
+app = _fh
+
+STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 # ── Data ──────────────────────────────────────────────────────
@@ -60,11 +61,11 @@ PLAYERS = [
 ]
 
 MATCHES = [
-    dict(result="WIN",  game="VALORANT", map_name="Ascent",        score="13 – 7",    mode="Competitive", date="Apr 2025"),
-    dict(result="LOSS", game="VALORANT", map_name="Bind",          score="10 – 13",   mode="Competitive", date="Apr 2025"),
-    dict(result="WIN",  game="CS2",      map_name="Dust II",       score="16 – 9",    mode="Matchmaking",  date="Mar 2025"),
-    dict(result="WIN",  game="VALORANT", map_name="Haven",         score="13 – 5",    mode="Competitive", date="Mar 2025"),
-    dict(result="LOSS", game="APEX",     map_name="Kings Canyon",  score="2nd Place", mode="Ranked BR",   date="Feb 2025"),
+    dict(result="WIN",  game="VALORANT", map_name="Ascent",       score="13 – 7",    mode="Competitive", date="Apr 2025"),
+    dict(result="LOSS", game="VALORANT", map_name="Bind",         score="10 – 13",   mode="Competitive", date="Apr 2025"),
+    dict(result="WIN",  game="CS2",      map_name="Dust II",      score="16 – 9",    mode="Matchmaking",  date="Mar 2025"),
+    dict(result="WIN",  game="VALORANT", map_name="Haven",        score="13 – 5",    mode="Competitive", date="Mar 2025"),
+    dict(result="LOSS", game="APEX",     map_name="Kings Canyon", score="2nd Place", mode="Ranked BR",   date="Feb 2025"),
 ]
 
 FPS_GAMES = [
@@ -79,14 +80,14 @@ FPS_GAMES = [
 ]
 
 STORY_GAMES = [
-    dict(code="GoW",  name="God of War",     desc="Kratos humbles us every time. A masterclass in storytelling."),
-    dict(code="RDR2", name="Red Dead 2",     desc="When we need to appreciate an open world built with obsessive detail."),
-    dict(code="TLOU", name="Last of Us",     desc="Survival, emotion, impossible choices. No one walks away unchanged."),
-    dict(code="GTA",  name="GTA V",          desc="Off-duty chaos and creative destruction. Sometimes you just vibe."),
+    dict(code="GoW",  name="God of War",  desc="Kratos humbles us every time. A masterclass in storytelling."),
+    dict(code="RDR2", name="Red Dead 2",  desc="When we need to appreciate an open world built with obsessive detail."),
+    dict(code="TLOU", name="Last of Us",  desc="Survival, emotion, impossible choices. No one walks away unchanged."),
+    dict(code="GTA",  name="GTA V",       desc="Off-duty chaos and creative destruction. Sometimes you just vibe."),
 ]
 
 
-# ── SVG icons (inlined for zero external requests) ────────────
+# ── SVG icons ─────────────────────────────────────────────────
 
 def yt_svg():
     return NotStr('<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>')
@@ -404,9 +405,9 @@ def footer_el():
                 cls="footer-logo"),
             P("WE AIM · WE CONQUER · WE DOMINATE", cls="footer-tagline"),
             Div(
-                A(yt_svg(), Span("YouTube"),    href="https://www.youtube.com/@wizly25", target="_blank", rel="noopener", cls="social-link", aria_label="YouTube"),
-                A(dc_svg(), Span("Discord"),    href="#", cls="social-link", aria_label="Discord"),
-                A(ig_svg(), Span("Instagram"),  href="#", cls="social-link", aria_label="Instagram"),
+                A(yt_svg(), Span("YouTube"),     href="https://www.youtube.com/@wizly25", target="_blank", rel="noopener", cls="social-link", aria_label="YouTube"),
+                A(dc_svg(), Span("Discord"),     href="#", cls="social-link", aria_label="Discord"),
+                A(ig_svg(), Span("Instagram"),   href="#", cls="social-link", aria_label="Instagram"),
                 A(tw_svg(), Span("Twitter / X"), href="#", cls="social-link", aria_label="Twitter / X"),
                 cls="footer-social",
             ),
@@ -443,10 +444,9 @@ def get():
     )
 
 
-# Vercel ASGI handler
-from mangum import Mangum
+# Vercel handler
 handler = Mangum(app, lifespan="off")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True, reload_excludes=[".venv"])
+    uvicorn.run("api.index:app", host="0.0.0.0", port=8000, reload=True, reload_excludes=[".venv"])
