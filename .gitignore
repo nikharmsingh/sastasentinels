@@ -8,5 +8,10 @@
 # Claude Code
 .claude/
 
+# Python
+.venv/
+__pycache__/
+*.pyc
+
 # Node (if ever introduced)
 node_modules/
